@@ -15,8 +15,8 @@ class TGParser:
 
     async def _connect(self):
         if not self.client:
-            self.client = TelegramClient(self.session_name, self.api_id, self.api_hash)
-            await self.client.connect()
+self.client = TelegramClient(self.session_name, self.api_id, self.api_hash, timeout=30) 
+await self.client.connect()
         return self.client
 
     async def _get_last_id(self, channel):
