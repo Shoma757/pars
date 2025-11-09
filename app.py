@@ -31,8 +31,8 @@ async def run(payload: dict = Body(...), token: str = Query(None)):
         raise HTTPException(status_code=422, detail="Input should be a valid list")
 
     async def job():
-        parser = TGParser(API_ID, API_HASH, SESSION_NAME, DB_PATH, WEBHOOK_URL)
-        await parser.run(channels)
+        parser = TGParser(API_ID, API_HASH, SESSION_NAME, DB_PATH, WEBHOOK_URL, PROXY_IP, PROXY_PORT)
+    await parser.run(channels)
 
     asyncio.create_task(job())
     return {"status": "started"}
