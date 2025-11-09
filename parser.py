@@ -12,9 +12,8 @@ class TGParser:
         self.db_path = db_path
         self.webhook_url = webhook_url
         self.client = None
-
-        # ЛОГИКА ПРОКСИ ДОЛЖНА БЫТЬ ВНУТРИ __init__ (с отступом 4 пробела)
-        if proxy_ip and proxy_port:
+        
+    if proxy_ip and proxy_port:
             self.proxy = (proxy_ip, int(proxy_port), 'socks5')
         else:
             self.proxy = None
