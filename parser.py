@@ -5,7 +5,6 @@ import sqlite3
 from datetime import datetime
 
 class TGParser:
-    # ИЗМЕНЕННЫЙ МЕТОД __init__
     def __init__(self, api_id, api_hash, session_name, db_path, webhook_url, proxy_ip=None, proxy_port=None):
         self.api_id = api_id
         self.api_hash = api_hash
@@ -14,14 +13,12 @@ class TGParser:
         self.webhook_url = webhook_url
         self.client = None
 
-        # ЛОГИКА ПРОКСИ ПЕРЕМЕЩЕНА СЮДА, ВНУТРЬ __init__
+        # ЛОГИКА ПРОКСИ ДОЛЖНА БЫТЬ ВНУТРИ __init__ (с отступом 4 пробела)
         if proxy_ip and proxy_port:
-            # Создаем кортеж прокси: (IP, PORT, PROTOCOL)
             self.proxy = (proxy_ip, int(proxy_port), 'socks5')
         else:
             self.proxy = None
 
-    # ИЗМЕНЕННЫЙ МЕТОД _connect
     async def _connect(self):
         if not self.client:
             self.client = TelegramClient(
@@ -29,8 +26,8 @@ class TGParser:
                 self.api_id, 
                 self.api_hash,
                 
-                timeout=30,  # Увеличенный таймаут
-                proxy=self.proxy # Используем созданный self.proxy
+                timeout=30,  
+                proxy=self.proxy
             )
             await self.client.connect()
         return self.client
@@ -52,8 +49,6 @@ class TGParser:
         conn.close()
 
     async def _send_to_webhook(self, data):
-        # Здесь aiohttp нужен будет свой прокси, если Railway его блокирует
-        # Но пока оставим так, так как мы используем прокси только для telethon
         async with aiohttp.ClientSession() as session:
             await session.post(self.webhook_url, json=data)
 
