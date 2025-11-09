@@ -12,6 +12,8 @@ TOKEN = os.getenv("TOKEN")
 WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 SESSION_NAME = os.getenv("SESSION_NAME")
 DB_PATH = os.getenv("DB_PATH")
+PROXY_IP = os.getenv("PROXY_IP")
+PROXY_PORT = os.getenv("PROXY_PORT")
 
 app = FastAPI()
 
